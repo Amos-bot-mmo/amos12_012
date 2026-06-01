@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>食物流派戰爭展覽</title>
+    
+    <style>
+        /* 基礎全網頁設定 */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* 頂部橫幅 (展覽介紹) */
+        .hero-banner {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .hero-banner h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: #ffb400; /* 金黃色焦點 */
+        }
+
+        .hero-banner p {
+            font-size: 1.1rem;
+            max-width: 800px;
+            margin: 10px auto;
+            line-height: 1.6;
+            color: #ccc;
+        }
+
+        .info-box {
+            margin-top: 20px;
+            font-size: 1rem;
+            background: #2b2b2b;
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #ffb400;
+        }
+
+        /* 主內容區塊 */
+        .main-content {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* 每個食物議題的卡片 */
+        .food-card {
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 桌機版讓圖片與文字左右並排 */
+        @media (min-width: 768px) {
+            .food-card {
+                flex-direction: row;
+            }
+            .food-img {
+                width: 40%;
+                object-fit: cover;
+            }
+            .food-detail {
+                width: 60%;
+            }
+        }
+
+        .food-img {
+            height: 300px;
+            background-color: #ddd;
+        }
+
+        .food-detail {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .food-detail h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #1a1a1a;
+            border-left: 5px solid #ffb400;
+            padding-left: 10px;
+        }
+
+        /* 互動按鈕群組 */
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .btn-vote {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #1a1a1a;
+            background: #fff;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s;
+        }
+
+        .btn-vote:hover {
+            background: #1a1a1a;
+            color: #fff;
+        }
+
+        /* 當按鈕被點選時的「激活」狀態 */
+        .btn-vote.active {
+            background: #ffb400;
+            border-color: #ffb400;
+            color: #1a1a1a;
+        }
+
+        /* 論點顯示區域 */
+        .argument-box {
+            background: #f9f9f9;
+            border-left: 4px solid #999;
+            padding: 15px;
+            margin-top: 10px;
+            min-height: 60px;
+            font-style: italic;
+            color: #555;
+        }
+
+        /* 實時數據大數據看板 */
+        .dashboard {
+            background: #222;
+            color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+
+        .dashboard h2 {
+            color: #ffb400;
+            margin-top: 0;
+        }
+
+        .chart-item {
+            margin-bottom: 20px;
+        }
+
+        .chart-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .bar-bg {
+            height: 25px;
+            background: #444;
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .bar-fill-a {
+            height: 100%;
+            background: #ffb400;
+            transition: width 0.5s ease;
+        }
+
+        .bar-fill-b {
+            height: 100%;
+            background: #666;
+            transition: width 0.5s ease;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            color: #888;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="hero-banner">
+        <h1>食物流派戰爭展覽</h1>
+        <p>香菜是為台灣普遍食物的額外美味秘訣，蚵仔麵線要加香菜、春捲冰淇淋要加香菜、肉圓要加香菜、還有香菜冰淇淋、香菜茶、這些有人視為人間美味，有人覺得狗都不吃。究竟這些食物之間的戰爭是喪心病狂還是狗都不吃，我們一起戰下去</p>
+        <div class="info-box">
+            📍 展覽地點：南門路三段485號 東門場館 │ 📅 活動時間：6月1日至7月31日 │ 🎟️ 請求加入戰爭方式：請於櫃檯購票，本網站不開放購票
+        </div>
+    </div>
+
+    <div class="main-content">
+
+        <div class="food-card">
+            <img class="food-img" src="images/coriander.jpg" alt="香菜">
+            <div class="food-detail">
+                <h2>戰爭一：你吃香菜嗎？我是不吃啦</h2>
+                <div class="button-group">
+                    <button class="btn-vote" onclick="vote('coriander', 'A', this)">美味的秘訣</button>
+                    <button class="btn-vote" onclick="vote('coriander', 'B', this)">地板上的草</button>
+                </div>
+                <div id="arg-coriander" class="argument-box">請點擊上方按鈕選擇你的流派，此處將顯示對應論點...</div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img class="food-img" src="images/tomato.jpg" alt="番茄">
+            <div class="food-detail">
+                <h2>戰爭二：番茄是水果還是蔬菜？</h2>
+                <div class="button-group">
+                    <button class="btn-vote" onclick="vote('tomato', 'A', this)">當然是水果啊</button>
+                    <button class="btn-vote" onclick="vote('tomato', 'B', this)">當然是蔬菜啊</button>
+                </div>
+                <div id="arg-tomato" class="argument-box">請點擊上方按鈕選擇你的流派，此處將顯示對應論點...</div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img class="food-img" src="images/curry.jpg" alt="咖哩飯">
+            <div class="food-detail">
+                <h2>戰爭三：吃咖哩飯要不要攪拌？</h2>
+                <div class="button-group">
+                    <button class="btn-vote" onclick="vote('curry', 'A', this)">要就是瘋狂攪拌</button>
+                    <button class="btn-vote" onclick="vote('curry', 'B', this)">攪一攪非常噁心</button>
+                </div>
+                <div id="arg-curry" class="argument-box">請點擊上方按鈕選擇你的流派，此處將顯示對應論點...</div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img class="food-img" src="images/pork.jpg" alt="滷肉飯">
+            <div class="food-detail">
+                <h2>戰爭四：滷肉飯是肉燥還是控肉？</h2>
+                <div class="button-group">
+                    <button class="btn-vote" onclick="vote('pork', 'A', this)">當然是全部碎肉啊</button>
+                    <button class="btn-vote" onclick="vote('pork', 'B', this)">當然是整塊控肉啊</button>
+                </div>
+                <div id="arg-pork" class="argument-box">請點擊上方按鈕選擇你的流派，此處將顯示對應論點...</div>
+            </div>
+        </div>
+
+        <div class="food-card">
+            <img class="food-img" src="images/bitter.jpg" alt="苦瓜">
+            <div class="food-detail">
+                <h2>戰爭五：苦瓜是不是給人吃的東西？</h2>
+                <div class="button-group">
+                    <button class="btn-vote" onclick="vote('bitter', 'A', this)">大人的回甘</button>
+                    <button class="btn-vote" onclick="vote('bitter', 'B', this)">長得像異形</button>
+                </div>
+                <div id="arg-bitter" class="argument-box">請點擊上方按鈕選擇你的流派，此處將顯示對應論點...</div>
+            </div>
+        </div>
+
+        <div class="dashboard">
+            <h2>📊 本地互動投票戰況</h2>
+            <div id="dashboard-content">
+                </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>© 食物流派戰爭展覽 數位導覽系統</p>
+    </footer>
+
+    <script>
+        // 設定五個流派的初始票數與論點內容
+        const foodWarsData = {
+            coriander: {
+                title: "吃不吃香菜", labelA: "要吃", labelB: "不吃", votesA: 10, votesB: 10,
+                argA: "【照三餐當水喝】香菜就是一道菜美味的秘訣啊，古人發明了春捲冰淇淋就是理解香菜的香，沿用到蚵仔麵線、肉圓等各種食物，是台灣最具代表性的草。如果可以，肯定要出現香菜冰淇淋、香菜巴斯克蛋糕.....",
+                argB: "【嚴厲斥責與撻伐】科學研究證實，討厭香菜是因為擁有 OR6A2 基因變異，但是一些異端份子將香菜直接延燒的我們的生活，彷彿一切都可以無限上綱，我不吃香菜，狗都不吃！！！！！！！"
+            },
+            tomato: {
+                title: "番茄是..", labelA: "水果", labelB: "蔬菜", votesA: 10, votesB: 10,
+                argA: "【當然是水果啊】你試想看看，台灣最流行最多人吃，我們以前中午也會吃的小蕃茄，甚至在南部也有沾梅粉、沾薑汁與糖粉、沾醬油膏的流派，雖然他們很糟糕但我們現在同一陣線，蕃茄是水果！",
+                argB: "【當然是蔬菜啊】你說番茄醬是種果醬嗎？蕃茄炒蛋、蕃茄義大利麵、甚至是莎莎醬、還有很多番茄製品，我當然不認同蕃茄是水果。但我願意提出「一個蕃茄各自表述，接受那些番茄強制為水果的革命份子」"
+            },
+            curry: {
+                title: "咖哩飯要不要攪拌", labelA: "要攪拌", labelB: "不攪拌", votesA: 10, votesB: 10,
+                argA: "【伴爆】咖哩飯的精髓就是咖哩醬跟飯完美融合，讓你味覺達到平衡。雖然有些人說那跟ㄆㄨㄣ沒兩樣，但我嚴正聲明，我寧願吃廚餘也不要吃到單純白飯或是單純的醬汁，那些是浪費食物的人在做的",
+                argB: "【不拌】咖哩飯幹嘛要拌？你們去挑戰肉燥飯做就好了啊，幹嘛挑戰我們。如果我今天很開心跟姐妹去吃咖喱飯，然後講隔壁班Terry的壞話一小時，我的咖喱飯就會乾掉捏，誰要吃乾掉的飯啊。"
+            },
+            pork: {
+                title: "滷肉飯當然是...", labelA: "肉燥", labelB: "控肉", votesA: 10, votesB: 10,
+                argA: "【當然是碎肉燥啊...】滷肉飯就當然是碎肉啊，南部的滷肉飯還會加上香菇、蔭瓜等食材，配上白飯當然是不拌啊。況且大塊肉請你叫他控肉飯好嗎，沒事幹嘛欺負我們滷肉飯，奇怪誒。",
+                argB: "【當然是大塊肉肉...】講到滷肉飯當然是過去南部人，為了務農要吃大塊肉塊來增加體力，誰要吃碎肉啊。而且碎肉的滷肉飯越來越囂張了，越來越代表台灣，但我還是為我們大塊滷肉花生，餵他花生！！"
+            },
+            bitter: {
+                title: "苦瓜這東西是...", labelA: "是食物", labelB: "不是物", votesA: 10, votesB: 10,
+                argA: "【他就是食物】可以理解那些不吃苦瓜的小孩，苦瓜是屬於大人的味道，如果說大人的苦是房貸、車貸、繳稅、三高與孩童教育問題，那麼這些苦瓜的退火與甘甜根本是  小Case而已！",
+                argB: "【他就是異形】你看他長得一副被蚊子叮的臉，然後吃起來又很苦，生活很苦我誰麼要吃苦啦，奇怪餒。還有人會說啊小孩子不要挑食，我要發起「我決定我吃什麼」社會運動，反抗奇怪大人的政權！"
+            }
+        };
+
+        // 核心功能：點擊按鈕後記錄投票、點選狀態，並抽換論點文字
+        function vote(topicId, side, buttonElement) {
+            const topic = foodWarsData[topicId];
+
+            // 1. 切換按鈕的 active 視覺樣式
+            const group = buttonElement.parentElement;
+            const buttons = group.querySelectorAll('.btn-vote');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            buttonElement.classList.add('active');
+
+            // 2. 更新論點文字顯示
+            const argBox = document.getElementById(`arg-${topicId}`);
+            if (side === 'A') {
+                argBox.innerText = topic.argA;
+                topic.votesA++; // 票數加一
+            } else {
+                argBox.innerText = topic.argB;
+                topic.votesB++; // 票數加一
+            }
+
+            // 3. 重新計算並更新下方的大數據看板
+            updateDashboard();
+        }
+
+        // 更新大數據看板的進度條
+        function updateDashboard() {
+            const container = document.getElementById('dashboard-content');
+            container.innerHTML = ''; // 清空舊畫面
+
+            for (let id in foodWarsData) {
+                const topic = foodWarsData[id];
+                const total = topic.votesA + topic.votesB;
+                const percentA = Math.round((topic.votesA / total) * 100);
+                const percentB = 100 - percentA;
+
+                // 動態插入新的進度條 HTML
+                container.innerHTML += `
+                    <div class="chart-item">
+                        <div class="chart-labels">
+                            <span>${topic.title} (${topic.labelA}派)</span>
+                            <span>${percentA}% vs ${percentB}% (${topic.labelB}派)</span>
+                        </div>
+                        <div class="bar-bg">
+                            <div class="bar-fill-a" style="width: ${percentA}%"></div>
+                            <div class="bar-fill-b" style="width: ${percentB}%"></div>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        // 網頁剛打開時，先繪製一次初始的看板數據
+        updateDashboard();
+    </script>
+</body>
+</html>
